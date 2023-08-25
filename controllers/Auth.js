@@ -25,11 +25,19 @@ const login = async (req, res) => {
 
     //now sign token and give a cookie :)
     const token = jwt.sign({ username }, process.env.JWT_SECRET);
-    res.cookie("authdata", token);
+    // TODO: make the cookie secure and cors.
+    res.cookie("authdata", token, { secure: true, HttpOnly: true });
 
-    return res.status(200).json({ msg: "User logged in successfully." });
+    return res.status(200).json({
+      msg: "User logged in successfully.",
+      user: {
+        name: userInDB.name,
+        username,
+        image: userInDB.image,
+        role: userInDB.role,
+      },
+    });
   } catch (err) {
-    throw err;
     return res.status(500).json({
       msg: "An unknown internal server error occured, please try again later.",
     });

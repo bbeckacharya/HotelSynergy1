@@ -10,6 +10,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/auth", authRouter);
 
+//404 not found
 app.use("*", (req, res) => {
   return res.status(404).json({ msg: "The requested thing was not found." });
 });
