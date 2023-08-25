@@ -1,6 +1,6 @@
 function Header() {
   return (
-    <header className="bg-slate-600 items-center h-[50px] p-2 text-white hidden md:flex justify-between border-b-2  border-gray-900">
+    <header className="bg-slate-600 items-center h-[60px] p-2 text-white hidden md:flex justify-between border-b-2  border-gray-900">
       <div>
         <h1 className="font-bold text-xl">
           Hotel & Restaurant Management System

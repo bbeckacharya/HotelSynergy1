@@ -17,12 +17,14 @@ function Secure({ children }: React.PropsWithChildren) {
       return (
         <>
           <Header />
-          <section
-            className="flex justify-start  "
-            style={{ height: "calc( 100% - 50px )" }}
-          >
+          <section className="flex justify-start">
             <Sidebar />
-            {children}
+            <main
+              className="h-full w-screen overflow-y-scroll overflow-x-hidden"
+              style={{ height: "calc(100vh - 60px)" }}
+            >
+              {children}
+            </main>
           </section>
           <MobileNavbar />
         </>
