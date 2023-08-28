@@ -2,9 +2,9 @@ import { MdDelete } from "react-icons/md";
 
 function ProfilePicture() {
   return (
-    <>
+    <section className="w-full md:w-2/3">
       <h1 className="text-xl">Profile Picture</h1>
-      <div className="flex items-center justify-start gap-4 mt-1 border-2 w-2/3 p-2 bg-slate-100 rounded">
+      <div className="flex items-center justify-start gap-4 mt-1 border-2 p-2 bg-slate-100 rounded">
         <img
           src={"/user.png"}
           alt="Profile picture"
@@ -25,7 +25,7 @@ function ProfilePicture() {
           </h1>
         </div>
       </div>
-    </>
+    </section>
   );
 }
 
