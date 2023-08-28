@@ -11,6 +11,7 @@ import AdminInventory from "./pages/Admin/Inventory";
 import StaffManagement from "./pages/Admin/Staff";
 import AdminSettings from "./pages/Admin/Settings";
 import MobileOptions from "./pages/Admin/MobileOptions";
+import Homepage from "./pages/Homepage";
 
 function App() {
   useEffect(() => {
@@ -93,6 +94,14 @@ function App() {
               </Secure>
             }
             path="/admin/options"
+          />
+          <Route
+            element={
+              <Public>
+                <Homepage />
+              </Public>
+            }
+            path="/"
           />
         </Routes>
       </BrowserRouter>

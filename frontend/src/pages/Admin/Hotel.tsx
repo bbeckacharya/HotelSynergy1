@@ -1,3 +1,5 @@
+import RoomCard from "../../components/RoomCard";
+
 function AdminHotel() {
   return (
     <section className="p-4 w-full">
@@ -36,29 +38,20 @@ function AdminHotel() {
           </span>
           <span className="w-1/2 p-2">
             <button className="w-full py-1 bg-rose-500 text-white rounded">
-              Check In
+              Avilable Rooms
             </button>
           </span>
           <span className="w-1/2 p-2">
             <button className="w-full py-1 bg-rose-500 text-white rounded">
-              Check Out
+              Booked Rooms
             </button>
           </span>
           <span className="w-1/2 p-2">
             <button className="w-full py-1 bg-rose-500 text-white rounded">
-              Housekeeping
+              Rooms under cleaning
             </button>
           </span>
-          <span className="w-1/2 p-2">
-            <button className="w-full py-1 bg-rose-500 text-white rounded">
-              New Order
-            </button>
-          </span>
-          <span className="w-1/2 p-2">
-            <button className="w-full py-1 bg-rose-500 text-white rounded">
-              New Service
-            </button>
-          </span>
+
           <span className="w-full mb-1">
             <button className="w-full py-1 hover:bg-green-800 transition-all rounded bg-green-500 text-white">
               View Rooms Status
@@ -78,20 +71,102 @@ function AdminHotel() {
             Add Room
           </button>
           <button className="px-5 py-1 m-1 hover:bg-slate-300 transition-all rounded border-2 bg-slate-200">
-            Check In
+            All rooms
           </button>
           <button className="px-5 py-1 m-1 hover:bg-slate-300 transition-all rounded border-2 bg-slate-200">
-            Check Out
+            Avilable Rooms
           </button>
           <button className="px-5 py-1 m-1 hover:bg-slate-300 transition-all rounded border-2 bg-slate-200">
-            Housekeeping
+            Booked Rooms
           </button>
           <button className="px-5 py-1 m-1 hover:bg-slate-300 transition-all rounded border-2 bg-slate-200">
-            New Order
+            Rooms under cleaning
           </button>
-          <button className="px-5 py-1 m-1 hover:bg-slate-300 transition-all rounded border-2 bg-slate-200">
-            New Service
-          </button>
+        </div>
+      </div>
+      <div className="mt-2 w-full hidden md:flex flex-col">
+        <h1 className="font-bold mt-2">Room Overview</h1>
+        <div className="flex gap-4 flex-wrap">
+          <RoomCard
+            guestList={[{ name: "Hari Acharya" }, { name: "Shyam Adhikari" }]}
+            roomId="asdf"
+            roomCapacity="4"
+            roomCost="2000"
+            roomnumber="404"
+            roomstatus="avilable"
+          />
+          <RoomCard
+            guestList={[{ name: "Hari Acharya" }, { name: "Shyam Adhikari" }]}
+            roomId="asdf"
+            roomCapacity="3"
+            roomCost="5000"
+            roomnumber="404"
+            roomstatus="cleaning"
+          />
+          <RoomCard
+            guestList={[{ name: "Hari Acharya" }, { name: "Shyam Adhikari" }]}
+            roomId="asdf"
+            roomCapacity="3"
+            roomCost="5000"
+            roomnumber="404"
+            roomstatus="booked"
+          />
+          <RoomCard
+            guestList={[{ name: "Hari Acharya" }, { name: "Shyam Adhikari" }]}
+            roomId="asdf"
+            roomCapacity="3"
+            roomCost="5000"
+            roomnumber="404"
+            roomstatus="booked"
+          />
+          <RoomCard
+            guestList={[{ name: "Hari Acharya" }, { name: "Shyam Adhikari" }]}
+            roomId="asdf"
+            roomCapacity="4"
+            roomCost="2000"
+            roomnumber="404"
+            roomstatus="avilable"
+          />
+          <RoomCard
+            guestList={[{ name: "Hari Acharya" }, { name: "Shyam Adhikari" }]}
+            roomId="asdf"
+            roomCapacity="3"
+            roomCost="5000"
+            roomnumber="404"
+            roomstatus="booked"
+          />
+          <RoomCard
+            guestList={[{ name: "Hari Acharya" }, { name: "Shyam Adhikari" }]}
+            roomId="asdf"
+            roomCapacity="4"
+            roomCost="2000"
+            roomnumber="404"
+            roomstatus="avilable"
+          />
+          <RoomCard
+            guestList={[{ name: "Hari Acharya" }, { name: "Shyam Adhikari" }]}
+            roomId="asdf"
+            roomCapacity="3"
+            roomCost="5000"
+            roomnumber="404"
+            roomstatus="booked"
+          />
+          <RoomCard
+            guestList={[{ name: "Hari Acharya" }, { name: "Shyam Adhikari" }]}
+            roomId="asdf"
+            roomCapacity="4"
+            roomCost="2000"
+            roomnumber="404"
+            roomstatus="avilable"
+          />
+          <RoomCard
+            guestList={[{ name: "Hari Acharya" }, { name: "Shyam Adhikari" }]}
+            roomId="asdf"
+            roomCapacity="3"
+            roomCost="5000"
+            roomnumber="404"
+            roomstatus="booked"
+          />
         </div>
       </div>
     </section>
