@@ -1,6 +1,6 @@
 # HotelSynergy - Hotel & Restaurant Management System
 
-![Hotel & Restaurant Management System Logo](https://yourlogoimageurl.com)
+![Hotel & Restaurant Management System Logo](/frontend/public/logo.png)
 
 Welcome to the HotelSynergy - a Hotel & Restaurant Management System, an open-source project built on the MERN (MongoDB, Express.js, React, Node.js) stack. This system is designed to streamline and enhance the operations of hotels and restaurants, making it easier to manage reservations, track customer orders, handle inventory, and more.
 
