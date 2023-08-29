@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Public from "./utils/public";
@@ -14,11 +13,6 @@ import MobileOptions from "./pages/Admin/MobileOptions";
 import Homepage from "./pages/Homepage";
 
 function App() {
-  useEffect(() => {
-    console.warn(
-      "Warning: This tool is for end users. Please do not paste unknown code or follow instructions from others while using this tool, it is only for software developers. If you are not aware of what you are doing please close this immidately. "
-    );
-  }, []);
   return (
     <>
       <BrowserRouter>
