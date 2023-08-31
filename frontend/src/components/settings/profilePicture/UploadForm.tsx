@@ -49,9 +49,9 @@ function ImageUploadForm({ showForm }: uploadformprops) {
       );
 
       if (response.ok) {
-        setLoading(false);
-        toast.success("Image uploaded successfully");
-        return showForm(false);
+        //we could set state variables to show changes but the url of image remains same so browser needs to refresh to show the new image.
+        // I think it makes sense to reload the page instead of having token and stuff just to update a image. (why complicate it if a simple soln can work OR I may be wrong.) LOL SORRY FOR THIS LONG COMMENT.
+        window.document.location.reload();
       } else {
         setLoading(false);
         toast.error("Can not upload profile image");
@@ -59,6 +59,7 @@ function ImageUploadForm({ showForm }: uploadformprops) {
       }
     } catch (error) {
       setLoading(false);
+      console.log(error);
       toast.error("An unknown error occoured, please try again later.");
       return showForm(false);
     }
@@ -92,6 +93,7 @@ function ImageUploadForm({ showForm }: uploadformprops) {
           <br />
           <div className="w-full mt-2 flex justify-between">
             <button
+              onClick={() => showForm(false)}
               type="reset"
               className="mt-2 bg-rose-500 hover:bg-rose-800 text-white rounded px-5 py-1 transition-all"
             >

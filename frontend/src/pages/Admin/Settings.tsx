@@ -17,7 +17,7 @@ function AdminSettings() {
   const [loading, setLoading] = useState(false);
   const [updateSettings, setUpdateSettings] = useState(false);
   const navigate = useNavigate();
-  const [, setProfileImage] = useState("");
+  const [profileImage, setProfileImage] = useState("");
   const [addBox, setAddBox] = useState(false);
   const [userSetting, setUserSetting] = useState<userSettingType>({
     username: "",
@@ -48,6 +48,7 @@ function AdminSettings() {
   //for refetching the data
   useEffect(() => {
     if (updateSettings) {
+      setProfileImage("/user.png");
       getAllData(setLoading, navigate, setUpdateSettings).then((data) => {
         setUserSetting(data.user);
         setCompanyData(data.company);
@@ -83,9 +84,7 @@ function AdminSettings() {
       )}
       <div className="w-full md:w-2/3 ">
         <section className="w-full p-4">
-          <ProfilePicture
-          // setUpdateSettings={setUpdateSettings}
-          />
+          <ProfilePicture image={profileImage} />
           <ProfileSettings
             setUpdateSettings={setUpdateSettings}
             userSettings={userSetting}
