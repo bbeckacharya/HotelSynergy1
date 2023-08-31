@@ -1,13 +1,17 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { userSettingType } from "../../types/settings.types";
 import { toast } from "react-toastify";
 import Loading from "../Loading";
 
 interface userSettingsProps {
   userSettings: userSettingType;
+  setUpdateSettings: Dispatch<SetStateAction<boolean>>;
 }
 
-function ProfileSettings({ userSettings }: userSettingsProps) {
+function ProfileSettings({
+  userSettings,
+  setUpdateSettings,
+}: userSettingsProps) {
   const [loading, setLoading] = useState(false);
   const [currentSetting, setCurrentSetting] = useState<userSettingType>({
     name: "",
@@ -33,8 +37,9 @@ function ProfileSettings({ userSettings }: userSettingsProps) {
       }
     );
     if (updateProfileRequest.status === 200) {
+      toast.success("User settings updated successfully.");
       setLoading(false);
-      return toast.success("User settings updated successfully.");
+      return setUpdateSettings(true);
     }
     if (!updateProfileRequest.ok) {
       setLoading(false);
@@ -119,7 +124,7 @@ function ProfileSettings({ userSettings }: userSettingsProps) {
               className="border-2 p-1 rounded-md "
             />
             <span className="text-sm text-gray-400">
-              You can set a new password.
+              Leave empty to not change.
             </span>
           </div>
         </fieldset>

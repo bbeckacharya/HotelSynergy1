@@ -103,11 +103,11 @@ function AddStaff({ showAddStaff }: addStaffProps) {
           New Password:
         </label>
         <input
+          type="password"
           value={staffDetail.password}
           onChange={(e) =>
             setStaffDetails({ ...staffDetail, password: e.target.value })
           }
-          type="text"
           className="border-2 p-1 rounded"
           id="staffpassword"
           placeholder="Set a new password"

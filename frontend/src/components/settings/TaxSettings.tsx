@@ -1,13 +1,16 @@
 import { taxListType } from "../../types/settings.types";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import TaxTableBody from "./TaxTableBody";
-
 interface taxProps {
   taxSettings: taxListType[];
+  showAddTax: Dispatch<SetStateAction<boolean>>;
+  setUpdateSettings: Dispatch<SetStateAction<boolean>>;
 }
 
-function TaxSettings({ taxSettings }: taxProps) {
-  const [currentTaxSettings, setCurrentTaxSettings] = useState<taxListType[]>();
+function TaxSettings({ taxSettings, showAddTax, setUpdateSettings }: taxProps) {
+  const [currentTaxSettings, setCurrentTaxSettings] = useState<taxListType[]>(
+    []
+  );
 
   useEffect(() => {
     setCurrentTaxSettings(taxSettings);
@@ -21,7 +24,12 @@ function TaxSettings({ taxSettings }: taxProps) {
             Configure the tax that are charged on bills.
           </span>
         </div>
-        <button className="bg-slate-600 hover:bg-slate-900 text-white px-5 py-1 rounded transition-all">
+        <button
+          onClick={() => {
+            showAddTax(true);
+          }}
+          className="bg-slate-600 hover:bg-slate-900 text-white px-5 py-1 rounded transition-all"
+        >
           Add New Tax
         </button>
       </div>
@@ -38,6 +46,7 @@ function TaxSettings({ taxSettings }: taxProps) {
           {currentTaxSettings?.map((tax) => {
             return (
               <TaxTableBody
+                setUpdateSettings={setUpdateSettings}
                 key={tax._id}
                 _id={tax._id}
                 name={tax.name}

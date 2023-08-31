@@ -2,13 +2,17 @@ const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const path = require("path");
 const userRouter = require("./Routes/User");
+const adminRouter = require("./Routes/Admin");
 require("dotenv").config();
 
 //middlewares
 app.use(cors());
 app.use(express.json());
 app.use("/auth", userRouter);
+app.use("/admin", adminRouter);
+app.use("/public", express.static(path.join(__dirname, "public")));
 
 //404 not found
 app.use("*", (req, res) => {

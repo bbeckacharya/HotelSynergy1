@@ -2,6 +2,8 @@ const User = require("../models/User");
 const Activity = require("../models/Activity");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Company = require("../models/Company");
+const Tax = require("../models/Tax");
 require("dotenv").config();
 
 //user authentication with username and password.
@@ -32,6 +34,7 @@ const login = async (req, res) => {
     return res.status(200).json({
       msg: "User logged in successfully.",
       user: {
+        id: userInDB._id,
         name: userInDB.name,
         username,
         image: userInDB.image,
@@ -45,7 +48,7 @@ const login = async (req, res) => {
   }
 };
 
-//to be fired first time to make default user.
+//to be fired first time to make default user. and company.
 const firstUser = async (req, res) => {
   try {
     //look if any user is already in DB
@@ -62,6 +65,19 @@ const firstUser = async (req, res) => {
         password: encryptedPassword,
       });
       await defaultUser.save();
+      const newCompany = await new Company({
+        name: "Example Company",
+        phoneOne: 9849951111,
+        phoneTwo: 9800000000,
+        website: "www.hari-acharya.com.np",
+        address: "Siremal PO.Box. 33258 Kinyo Street, Tokyo, Japan",
+      });
+      await newCompany.save();
+      const defaultTax = await new Tax({
+        name: "VAT",
+        value: 13.0,
+      });
+      await defaultTax.save();
       return res
         .status(200)
         .json({ msg: "Default admin user added successfully." });
