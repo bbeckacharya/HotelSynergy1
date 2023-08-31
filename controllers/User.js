@@ -112,19 +112,27 @@ const changePassword = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  const { user } = req.body;
-  if (!user)
-    return res.status(400).json({ msg: "User is required to be deleted." });
-  const userInDB = await User.findOne({ _id: user });
-  if (!userInDB)
-    return res.status(404).json({ msg: "The user was not found." });
-  if (userInDB.role === "admin") {
-    const allAdmins = await User.find({ role: "admin" });
-    if (allAdmins.length <= 1)
-      return res.status(400).json({ msg: "Single Admin can not be deleted." });
-  } else {
-    await User.findOneAndDelete({ _id: user });
-    return res.status(200).json({ msg: "The user was deleted successfully." });
+  try {
+    const { user } = req.body;
+    if (!user)
+      return res.status(400).json({ msg: "User is required to be deleted." });
+    const userInDB = await User.findOne({ _id: user });
+    if (userInDB.role === "admin") {
+      const allAdmins = await User.find({ role: "admin" });
+      if (allAdmins.length === 1) {
+        return res
+          .status(400)
+          .json({ msg: "Only one admin can not be deleted." });
+      }
+    }
+    const deletedUser = await User.findOneAndDelete({ _id: user });
+    if (!deletedUser) {
+      return res.status(404).json({ msg: "The user was not found to delete." });
+    } else {
+      return res.status(200).json({ msg: "User deleted successfully." });
+    }
+  } catch (error) {
+    return res.status(500).json({ msg: "Unknown server error occoured." });
   }
 };
 

@@ -2,6 +2,7 @@ const Company = require("../models/Company");
 const User = require("../models/User");
 const Tax = require("../models/Tax");
 const bcrypt = require("bcrypt");
+require("dotenv").config();
 
 const getAdminSettings = async (req, res) => {
   try {
@@ -176,8 +177,18 @@ const deleteATax = async (req, res) => {
 const changePicture = async (req, res) => {
   const { id } = req.body;
   const imagePath = req.file.path;
-  console.log(id);
-  return res.status(200).json({ msg: "Image Uploaded Successfully." });
+  const userInDB = await User.findOneAndUpdate(
+    { _id: id },
+    {
+      image: `${process.env.SERVER_URL}:${process.env.SERVER_PORT}/public/users/${id}.png`,
+    }
+  );
+  if (userInDB) {
+    return res.status(200).json({ msg: "Image Uploaded Successfully." });
+  }
+  return res
+    .status(400)
+    .json({ msg: "The user was not found to update image." });
 };
 
 module.exports = {

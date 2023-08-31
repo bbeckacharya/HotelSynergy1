@@ -21,45 +21,50 @@ function DeleteUserConfirmation({
 
   const handleDelete = async () => {
     setLoading(true);
-    console.log(user);
-    const deletAccountRequest = await fetch(
-      import.meta.env.VITE_SERVER_URL + "auth/delete",
-      {
-        method: "DELETE",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ user }),
-      }
-    );
-    if (deletAccountRequest.ok) {
-      showDeleteConfirmation(false);
-      setLoading(false);
-      return toast.success("Account deleted successfully.");
-    }
-    if (deletAccountRequest.status === 500) {
-      showDeleteConfirmation(false);
-      setLoading(false);
-      return toast.error(
-        "There was an unknow server error, please try again later."
+    // console.log(user);
+    try {
+      const deletAccountRequest = await fetch(
+        import.meta.env.VITE_SERVER_URL + "auth/delete",
+        {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ user }),
+        }
       );
-    }
-    if (deletAccountRequest.status === 404) {
-      showDeleteConfirmation(false);
+      if (deletAccountRequest.ok) {
+        showDeleteConfirmation(false);
+        setLoading(false);
+        return toast.success("Account deleted successfully.");
+      }
+      if (deletAccountRequest.status === 500) {
+        showDeleteConfirmation(false);
+        setLoading(false);
+        return toast.error(
+          "There was an unknow server error, please try again later."
+        );
+      }
+      if (deletAccountRequest.status === 404) {
+        showDeleteConfirmation(false);
+        setLoading(false);
+        return toast.error("Sorry, that user was not found.");
+      }
+      if (deletAccountRequest.status === 400) {
+        setLoading(false);
+        const resp = await deletAccountRequest.json();
+        console.log(resp);
+        showDeleteConfirmation(false);
+        return toast.error("Sorry, the account can not be deleted.");
+      }
+      if (deletAccountRequest.status === 401) {
+        showDeleteConfirmation(false);
+        setLoading(false);
+        return toast.error("You are not allowed to take that action.");
+      }
       setLoading(false);
-      return toast.error("Sorry, that user was not found.");
-    }
-    if (deletAccountRequest.status === 400) {
-      setLoading(false);
-      const resp = await deletAccountRequest.json();
-      console.log(resp);
-      showDeleteConfirmation(false);
-      return toast.error("Sorry, the account can not be deleted.");
-    }
-    if (deletAccountRequest.status === 401) {
-      showDeleteConfirmation(false);
-      setLoading(false);
-      return toast.error("You are not allowed to take that action.");
+    } catch (err) {
+      console.log(err);
     }
   };
 
